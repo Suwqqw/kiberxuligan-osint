@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIberXuligan — Osint By kiber Intelligence Ecosystem</title>
+  <!-- High-Performance Asynchronous Typography Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/vis-network.min.js"></script>
+</head>
+<body>
+
+  <!-- Optimized Interactive Constellations Canvas -->
+  <canvas id="constellation-canvas" class="constellation-canvas"></canvas>
+
+  <!-- Ambient Glow Overlay -->
+  <div class="ambient-glow"></div>
+
+  <!-- Top Floating Navigation Pill (ClearVisual Minimalist Capsule) -->
+  <header class="top-nav-wrapper">
+    <nav class="top-nav-pill">
+      <!-- Navigation Controls -->
+      <div class="nav-pill-group">
+        <button id="btn-lang-toggle" class="nav-pill-lang" title="Язык интерфейса: RU">
+          <span class="lang-ru active">RU</span>
+        </button>
+
+        <button id="btn-nav-skip" class="nav-pill-item nav-btn-skip" title="Пропустить к поиску">
+          <span class="btn-icon">⏩</span>
+          <span class="pill-text">Пропустить</span>
+        </button>
+
+        <button id="btn-nav-create" class="nav-pill-action nav-btn-create" title="Создать новую разведку">
+          <span class="btn-icon">➕</span>
+          <span class="pill-text">Создать</span>
+        </button>
+
+        <div class="nav-pill-badge-num" id="nav-count-badge" title="Активных модулей: 4">
+          <span class="badge-num-glow">3</span>
+        </div>
+      </div>
+
+      <div class="nav-pill-divider"></div>
+
+      <!-- Ambient Audio Player: Novulent - Unknown Feelings (Slowed & Reverb) -->
+      <div class="nav-pill-group">
+        <div class="nav-music-player" id="nav-music-player">
+          <button id="btn-music-play" class="nav-music-play-btn" title="Воспроизведение: Novulent - Unknown Feelings (Slowed & Reverb)">
+            <span id="music-play-icon">▶</span>
+          </button>
+          <div class="music-track-info" title="Novulent - Unknown Feelings (Slowed & Reverb)">
+            <div class="music-equalizer" id="music-equalizer">
+              <span class="eq-bar bar-1"></span>
+              <span class="eq-bar bar-2"></span>
+              <span class="eq-bar bar-3"></span>
+              <span class="eq-bar bar-4"></span>
+            </div>
+            <span class="music-track-title">Novulent - Unknown Feelings (Slowed & Reverb)</span>
+          </div>
+          <button id="btn-sound-toggle" class="nav-pill-action sound-btn" title="Звук: ВКЛ / ВЫКЛ">
+            <span id="sound-icon">🔊</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="content-container">
+
+    <!-- Hero Section (KIberXuligan Aesthetic) -->
+    <section class="hero-section" id="hero">
+      <h1 class="hero-title">KIberXuligan</h1>
+      <p class="hero-subtitle">
+        Osint By kiber <span class="hero-divider">•</span> Единая экосистема разведки по никнейму (RuNet & Global)
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-hero-primary" id="btn-hero-start">
+          <span class="btn-icon">✈</span>
+          <span>Начать разведку</span>
+        </button>
+      </div>
+
+      <!-- Engine Status Indicators in Floating Bar -->
+      <div class="tool-status-badges" id="tool-status-bar">
+        <div class="badge online" id="badge-maigret">Maigret</div>
+        <div class="badge online" id="badge-snoop">Snoop Project</div>
+        <div class="badge online" id="badge-sherlock">Sherlock</div>
+        <div class="badge online" id="badge-blackbird">Blackbird</div>
+        <div class="badge online" id="badge-nexfil">Nexfil</div>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <span>листай вниз</span>
+        <span class="scroll-arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- Search Control Capsule Section -->
+    <section class="panel glass-card search-card" id="search-section">
+      <div class="search-box">
+        <div class="input-group">
+          <span class="input-icon">🎯</span>
+          <input 
+            type="text" 
+            id="target-username" 
+            class="search-input" 
+            placeholder="Единый автономный поиск: никнейм, @telegram, email или телефон..." 
+            autocomplete="off" 
+            autofocus
+          >
+          <span class="input-glow-border"></span>
+        </div>
+        <button id="btn-search" class="btn btn-primary">
+          <span class="btn-icon">🚀</span>
+          <span>Запустить разведку</span>
+        </button>
+        <button id="btn-stop" class="btn btn-stop">
+          <span class="btn-icon">⏹️</span>
+          <span>Остановить</span>
+        </button>
+      </div>
+
+      <div class="options-row">
+        <!-- Engine Selection Toggles -->
+        <div class="checkbox-group">
+          <span class="options-label">Утилиты:</span>
+          <label class="checkbox-pill">
+            <input type="checkbox" id="chk-maigret" checked>
+            <span class="pill-check-indicator"></span>
+            <span class="pill-check-label">Maigret (СНГ / Глубокий парсинг)</span>
+          </label>
+          <label class="checkbox-pill">
+            <input type="checkbox" id="chk-snoop" checked>
+            <span class="pill-check-indicator"></span>
+            <span class="pill-check-label">Snoop (Рунет & Форумы)</span>
+          </label>
+          <label class="checkbox-pill">
+            <input type="checkbox" id="chk-sherlock" checked>
+            <span class="pill-check-indicator"></span>
+            <span class="pill-check-label">Sherlock (Global 400+)</span>
+          </label>
+          <label class="checkbox-pill">
+            <input type="checkbox" id="chk-blackbird" checked>
+            <span class="pill-check-indicator"></span>
+            <span class="pill-check-label">Blackbird (Async + Web)</span>
+          </label>
+          <label class="checkbox-pill">
+            <input type="checkbox" id="chk-nexfil" checked>
+            <span class="pill-check-indicator"></span>
+            <span class="pill-check-label">Nexfil (Быстрый 350+ Global)</span>
+          </label>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="mode-toggle-wrapper">
+          <div class="mode-toggle">
+            <button id="mode-fast" class="mode-btn active" title="Поиск по популярным ресурсам (быстрый отклик)">⚡ Быстрый режим</button>
+            <button id="mode-deep" class="mode-btn" title="Глубокий поиск по всей базе сайтов (тысячи ресурсов)">🔍 Глубокий поиск</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engines Live Progress Grid -->
+    <section class="engines-grid">
+      <!-- Maigret -->
+      <div class="engine-card glass-card" id="card-maigret">
+        <div class="engine-header">
+          <div class="engine-title title-maigret">
+            <span class="engine-dot dot-maigret"></span>
+            <span>Maigret</span>
+          </div>
+          <span class="engine-badge" id="badge-status-maigret">Ожидание</span>
+        </div>
+        <div class="engine-stats">
+          <span class="stats-label">Найдено профилей:</span>
+          <span class="engine-count" id="count-maigret">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill fill-maigret" id="progress-maigret"></div>
+        </div>
+      </div>
+
+      <!-- Snoop Project -->
+      <div class="engine-card glass-card" id="card-snoop">
+        <div class="engine-header">
+          <div class="engine-title title-snoop">
+            <span class="engine-dot dot-snoop"></span>
+            <span>Snoop Project</span>
+          </div>
+          <span class="engine-badge" id="badge-status-snoop">Ожидание</span>
+        </div>
+        <div class="engine-stats">
+          <span class="stats-label">Найдено профилей:</span>
+          <span class="engine-count" id="count-snoop">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill fill-snoop" id="progress-snoop"></div>
+        </div>
+      </div>
+
+      <!-- Sherlock -->
+      <div class="engine-card glass-card" id="card-sherlock">
+        <div class="engine-header">
+          <div class="engine-title title-sherlock">
+            <span class="engine-dot dot-sherlock"></span>
+            <span>Sherlock</span>
+          </div>
+          <span class="engine-badge" id="badge-status-sherlock">Ожидание</span>
+        </div>
+        <div class="engine-stats">
+          <span class="stats-label">Найдено профилей:</span>
+          <span class="engine-count" id="count-sherlock">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill fill-sherlock" id="progress-sherlock"></div>
+        </div>
+      </div>
+
+      <!-- Blackbird -->
+      <div class="engine-card glass-card" id="card-blackbird">
+        <div class="engine-header">
+          <div class="engine-title title-blackbird">
+            <span class="engine-dot dot-blackbird"></span>
+            <span>Blackbird</span>
+          </div>
+          <span class="engine-badge" id="badge-status-blackbird">Ожидание</span>
+        </div>
+        <div class="engine-stats">
+          <span class="stats-label">Найдено профилей:</span>
+          <span class="engine-count" id="count-blackbird">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill fill-blackbird" id="progress-blackbird"></div>
+        </div>
+      </div>
+
+<!-- Nexfil -->
+      <div class="engine-card glass-card" id="card-nexfil">
+        <div class="engine-header">
+          <div class="engine-title title-nexfil">
+            <span class="engine-dot dot-nexfil"></span>
+            <span>Nexfil</span>
+          </div>
+          <span class="engine-badge" id="badge-status-nexfil">Ожидание</span>
+        </div>
+        <div class="engine-stats">
+          <span class="stats-label">Найдено профилей:</span>
+          <span class="engine-count" id="count-nexfil">0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill fill-nexfil" id="progress-nexfil"></div>
+        </div>
+      </div>
+    
+    </section>
+
+    <!-- Main View Section with Glass Tabs -->
+    <section class="panel glass-card main-views-card" id="views-section">
+      <div class="view-tabs">
+        <button class="tab-btn active" data-tab="tab-graph">
+          <span class="tab-icon">🕸️</span>
+          <span>Граф связей (ОСИНТ Цепочка)</span>
+          <span class="badge" id="graph-nodes-count">0 узлов</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-table">
+          <span class="tab-icon">📋</span>
+          <span>Сводная таблица результатов</span>
+          <span class="badge" id="table-rows-count">0 совпадений</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-email">
+          <span class="tab-icon">✉️</span>
+          <span>Почта OSINT</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-phone">
+          <span class="tab-icon">📱</span>
+          <span>Телефон OSINT</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-exif">
+          <span class="tab-icon">🖼️</span>
+          <span>EXIF & Фото</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-network">
+          <span class="tab-icon">🌐</span>
+          <span>IP & Домен Recon</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-dossier">
+          <span class="tab-icon">📑</span>
+          <span>Досье цели</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-telegram"><span class="tab-icon">✈️</span><span>Telegram OSINT</span></button>
+        <button class="tab-btn" data-tab="tab-vk"><span class="tab-icon">🟦</span><span>ВКонтакте OSINT</span></button>
+        <button class="tab-btn" data-tab="tab-face"><span class="tab-icon">👁️</span><span>Лицо & Фото</span></button>
+        <button class="tab-btn" data-tab="tab-crypto"><span class="tab-icon">🪙</span><span>Крипто OSINT</span></button>
+        <button class="tab-btn" data-tab="tab-auto"><span class="tab-icon">🚗</span><span>Авто OSINT</span></button>
+        <button class="tab-btn" data-tab="tab-breaches"><span class="tab-icon">🔓</span><span>Утечки баз</span></button>
+        <button class="tab-btn" data-tab="tab-pivot"><span class="tab-icon">🧠</span><span>Цепочка деанона</span></button>
+        <button class="tab-btn" data-tab="tab-logs">
+          <span class="tab-icon">📟</span>
+          <span>Журнал выполнения (Live Logs)</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Graph View -->
+      <div class="tab-content active" id="tab-graph">
+        <div class="graph-wrapper">
+          <div id="network-canvas"></div>
+          <div class="graph-controls">
+            <button class="graph-btn" id="btn-fit" title="Сбросить масштаб и центрировать">🎯 Центр</button>
+            <button class="graph-btn" id="btn-physics" title="Включить / отключить физику движения">⚡ Физика: ВКЛ</button>
+          </div>
+          <div class="graph-legend">
+            <div class="legend-item"><span class="legend-color" style="background: #00f0b5;"></span> Рунет & СНГ</div>
+            <div class="legend-item"><span class="legend-color" style="background: #06b6d4;"></span> Мессенджеры</div>
+            <div class="legend-item"><span class="legend-color" style="background: #3b82f6;"></span> Соцсети</div>
+            <div class="legend-item"><span class="legend-color" style="background: #a855f7;"></span> IT / Dev</div>
+            <div class="legend-item"><span class="legend-color" style="background: #f43f5e;"></span> Гейминг</div>
+            <div class="legend-item"><span class="legend-color" style="background: #ec4899;"></span> Медиа</div>
+            <div class="legend-item"><span class="legend-color" style="background: #eab308;"></span> Карьера</div>
+            <div class="legend-item"><span class="legend-color" style="background: #f59e0b;"></span> Извлеченные сущности</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Table View -->
+      <div class="tab-content" id="tab-table">
+        <div class="table-panel">
+          <div class="table-toolbar">
+            <div class="filter-pills" id="category-filters">
+              <button class="filter-pill active" data-category="all">Все (0)</button>
+              <button class="filter-pill" data-category="runet">Рунет (0)</button>
+              <button class="filter-pill" data-category="messaging">Мессенджеры (0)</button>
+              <button class="filter-pill" data-category="social">Соцсети (0)</button>
+              <button class="filter-pill" data-category="tech">IT/Dev (0)</button>
+              <button class="filter-pill" data-category="gaming">Гейминг (0)</button>
+              <button class="filter-pill" data-category="other">Прочие (0)</button>
+            </div>
+            <div>
+              <button id="btn-export-csv" class="graph-btn btn-export">📥 Экспорт CSV</button>
+            </div>
+          </div>
+
+          <div class="table-scroll-container">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th style="width: 200px;">Платформа / Сервис</th>
+                  <th style="width: 140px;">Категория</th>
+                  <th>Прямая ссылка на профиль</th>
+                  <th style="width: 240px;">Подтверждено утилитами</th>
+                  <th style="width: 120px;">Надежность</th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+                <tr>
+                  <td colspan="5" class="table-empty-msg">
+                    Запустите разведку по никнейму для отображения найденных аккаунтов
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Email OSINT -->
+      <div class="tab-content" id="tab-email">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">✉️</span>
+              <div>
+                <h3>Почта OSINT — Поиск аккаунтов и аудит Email</h3>
+                <p class="module-desc">Поиск зарегистрированных аккаунтов (Mail.ru, GitHub, Holehe 120+), MX-инфраструктура, Gravatar и целевые дорки</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="email" id="email-input" class="module-input" placeholder="Введите Email цели (например: target@mail.ru, user@gmail.com)..." />
+            <button id="btn-analyze-email" class="btn" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8;">
+              <span class="btn-icon">🔍</span>
+              <span>Анализ почты & MX</span>
+            </button>
+            <button id="btn-scan-email-holehe" class="btn btn-primary">
+              <span class="btn-icon">⚡</span>
+              <span>Поиск аккаунтов (Holehe 120+)</span>
+            </button>
+          </div>
+
+          <div id="email-results" style="display: none; margin-top: 20px;">
+            <!-- Summary Cards -->
+            <div class="results-grid" style="margin-bottom: 20px;">
+              <div class="info-card">
+                <div class="info-card-label">Провайдер почты</div>
+                <div class="info-card-value cyan" id="res-email-provider">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Домен</div>
+                <div class="info-card-value" id="res-email-domain">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">MX Серверы</div>
+                <div class="info-card-value emerald" id="res-email-mx">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Одноразовая почта (Disposable)</div>
+                <div class="info-card-value purple" id="res-email-disposable">—</div>
+              </div>
+              <div class="info-card" id="card-email-gravatar">
+                <div class="info-card-label">Gravatar Профиль</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px;">
+                  <img id="email-gravatar-img" src="" alt="Gravatar" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-glass); background: #000; display: none;" />
+                  <a id="email-gravatar-link" href="#" target="_blank" class="table-link" style="font-size: 13px;">Проверить профиль Gravatar ↗</a>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">VK / Mail.ru Экосистема</div>
+                <div class="info-card-value emerald" id="res-email-mailru">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">GitHub Публичные коммиты</div>
+                <div class="info-card-value purple" id="res-email-github">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Логи инфостиллеров (Stealers)</div>
+                <div class="info-card-value" id="res-email-breach">—</div>
+              </div>
+            </div>
+
+            <!-- Auto-extracted username notification -->
+            <div id="email-extracted-wrap" style="margin-bottom: 20px; display: none; padding: 14px 18px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-sm); align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <span style="font-size: 13px; color: var(--text-muted);">Извлечен логин для сквозной разведки:</span>
+                <b id="email-extracted-val" style="font-size: 15px; color: var(--accent-cyan); margin-left: 6px;"></b>
+              </div>
+              <button id="btn-email-auto-recon" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px; font-weight: 700;">
+                <span>⚡ Запустить поиск по логину на 400+ сайтах ↗</span>
+              </button>
+            </div>
+
+            <!-- Discovered Accounts Table -->
+            <div id="email-accounts-panel" style="margin-top: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🎯 Зарегистрированные аккаунты по этому Email</span>
+                <span class="badge" id="email-accounts-count" style="background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.4);">0 найдено</span>
+              </div>
+              <div class="table-scroll-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 180px;">Сервис / Платформа</th>
+                      <th>Ссылка на профиль</th>
+                      <th>Детали / Доказательство</th>
+                      <th style="width: 140px;">Статус</th>
+                    </tr>
+                  </thead>
+                  <tbody id="email-accounts-body">
+                    <tr><td colspan="4" class="table-empty-msg">Ожидание запуска проверки</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Cross Recon Action -->
+            <div id="email-cross-recon-wrap" style="margin-top: 20px; display: none;">
+              <button id="btn-cross-recon-username" class="graph-btn btn-export" style="padding: 10px 18px; font-size: 13px;">
+                ⚡ Запустить кросс-поиск по логину на 350+ сайтах ↗
+              </button>
+            </div>
+
+            <!-- Email Dorks -->
+            <div style="margin-top: 28px;">
+              <div class="info-card-label">Целевые Google Dorks (Поиск утечек, пастбинов и кода)</div>
+              <div class="dorks-list" id="email-dorks-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Phone OSINT -->
+      <div class="tab-content" id="tab-phone">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">📱</span>
+              <div>
+                <h3>Телефон OSINT — Анализатор номеров и операторов</h3>
+                <p class="module-desc">Определение оператора (DEF Минцифры), региона РФ, прямые чаты мессенджеров, базы спама и проверка MNP</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="phone-input" class="module-input" placeholder="Введите номер телефона (+79161234567, 8926..., +380...)..." />
+            <button id="btn-analyze-phone" class="btn btn-primary">
+              <span class="btn-icon">🔍</span>
+              <span>Проверить номер</span>
+            </button>
+          </div>
+
+          <div id="phone-results" style="display: none; margin-top: 20px;">
+            <div class="results-grid">
+              <div class="info-card">
+                <div class="info-card-label">Международный формат (E.164)</div>
+                <div class="info-card-value cyan" id="res-phone-e164">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Национальный формат</div>
+                <div class="info-card-value" id="res-phone-nat">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Оператор связи (DEF)</div>
+                <div class="info-card-value emerald" id="res-phone-carrier">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Регион & Локация</div>
+                <div class="info-card-value" id="res-phone-loc">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Тип номера</div>
+                <div class="info-card-value purple" id="res-phone-type">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Часовой пояс</div>
+                <div class="info-card-value" id="res-phone-tz">—</div>
+              </div>
+            </div>
+
+            <!-- Phone Breach & Stealers Status Card -->
+            <div id="phone-breach-card" class="info-card" style="margin-top: 20px; border-color: rgba(56, 189, 248, 0.4); display: none;">
+              <div class="info-card-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>🛡️ Проверка компрометации номера в базах утечек & логах</span>
+                <span class="badge" id="phone-breach-badge">Чисто</span>
+              </div>
+              <div id="phone-breach-text" style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="info-card-label">Прямой переход в диалог мессенджеров (без добавления в контакты)</div>
+              <div class="action-buttons-row" id="phone-messengers-row"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="info-card-label">Определители номеров, отзывы, спам-базы и проверка переноса (MNP)</div>
+              <div class="action-buttons-row" id="phone-directories-row"></div>
+            </div>
+
+            <div style="margin-top: 28px;">
+              <div class="info-card-label">Целевые Google Dorks (Объявления Авито/Юла/Циан, резюме HH.ru, мессенджеры)</div>
+              <div class="dorks-list" id="phone-dorks-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: EXIF & Photo -->
+      <div class="tab-content" id="tab-exif">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🖼️</span>
+              <div>
+                <h3>EXIF & Геолокация Фотографий</h3>
+                <p class="module-desc">Извлечение скрытых метаданных, модели камеры/смартфона, даты съемки и точных GPS-координат с привязкой к картам</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropzone-container" id="exif-dropzone">
+            <input type="file" id="exif-file-input" accept="image/*" style="display: none;">
+            <div class="dropzone-icon">📷</div>
+            <div class="dropzone-text">Перетащите фото сюда или нажмите для выбора</div>
+            <div class="dropzone-sub">Поддерживаются JPEG, PNG, TIFF, HEIC (до 50 МБ)</div>
+          </div>
+
+          <div id="exif-results" style="display: none; margin-top: 20px;">
+            <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+              <img id="exif-thumb" class="exif-preview-img" src="" alt="Preview">
+              <div style="flex: 1; min-width: 280px;" class="results-grid">
+                <div class="info-card">
+                  <div class="info-card-label">Устройство / Камера</div>
+                  <div class="info-card-value cyan" id="res-exif-device">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Дата и время съемки</div>
+                  <div class="info-card-value" id="res-exif-date">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Программа / ПО</div>
+                  <div class="info-card-value purple" id="res-exif-software">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Разрешение</div>
+                  <div class="info-card-value" id="res-exif-dims">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="exif-gps-card" class="info-card" style="margin-top: 16px; border-color: rgba(0, 240, 181, 0.4); display: none;">
+              <div class="info-card-label">📍 Точные GPS Координаты</div>
+              <div class="info-card-value emerald" id="res-exif-coords" style="font-size: 18px; margin-bottom: 12px;">—</div>
+              <div class="action-buttons-row">
+                <a id="btn-exif-yandex" target="_blank" class="btn-messenger tg">🗺️ Открыть в Яндекс Картах ↗</a>
+                <a id="btn-exif-google" target="_blank" class="btn-messenger wa">🌍 Открыть в Google Maps ↗</a>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <div class="info-card-label">Полный дамп метаданных (EXIF Tags)</div>
+              <div class="table-scroll-container" style="max-height: 250px;">
+                <table class="results-table">
+                  <thead>
+                    <tr><th style="width: 220px;">Тег</th><th>Значение</th></tr>
+                  </thead>
+                  <tbody id="exif-tags-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 6: Network Recon (IP & Domain) -->
+      <div class="tab-content" id="tab-network">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🌐</span>
+              <div>
+                <h3>IP & Домен Recon — Сетевой след</h3>
+                <p class="module-desc">GeoIP геолокация хоста, автономная система ASN, провайдер хостинга, обратный DNS и детект прокси</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="network-input" class="module-input" placeholder="Введите IP-адрес или домен (например: 8.8.8.8, ya.ru, t.me)..." />
+            <button id="btn-analyze-network" class="btn btn-primary">
+              <span class="btn-icon">🌐</span>
+              <span>Исследовать</span>
+            </button>
+          </div>
+
+          <div id="network-results" style="display: none; margin-top: 20px;">
+            <div class="results-grid">
+              <div class="info-card">
+                <div class="info-card-label">IP-адрес</div>
+                <div class="info-card-value cyan" id="res-net-ip">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Хостнейм / Reverse DNS</div>
+                <div class="info-card-value" id="res-net-host">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Страна & Город</div>
+                <div class="info-card-value emerald" id="res-net-country">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Провайдер / Организация</div>
+                <div class="info-card-value" id="res-net-isp">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Автономная система (ASN)</div>
+                <div class="info-card-value purple" id="res-net-asn">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Proxy / VPN / Hosting</div>
+                <div class="info-card-value amber" id="res-net-proxy">—</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px;" id="network-map-btn-wrap">
+              <a id="btn-net-map" target="_blank" class="btn-messenger wa" style="display: none;">🗺️ Показать локацию хоста на карте ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 7: Dossier -->
+      <div class="tab-content" id="tab-dossier">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">📑</span>
+              <div>
+                <h3>Сводное OSINT-досье цели</h3>
+                <p class="module-desc">Итоговая компиляция цифрового следа со всех подключенных модулей разведки</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button id="btn-refresh-dossier" class="graph-btn">🔄 Обновить Досье</button>
+              <button id="btn-print-dossier" class="graph-btn btn-primary">🖨️ Печать / Сохранить в PDF</button>
+              <button id="btn-download-json" class="graph-btn">💾 Экспорт JSON</button>
+            </div>
+          </div>
+
+          <div class="dossier-wrapper" id="dossier-card">
+            <div class="dossier-header">
+              <div>
+                <h2 style="font-size: 24px; font-weight: 800; color: #fff; margin: 0 0 4px 0;">KIberXuligan Intelligence Dossier</h2>
+                <div style="font-size: 12px; color: var(--text-dim);">Документ сформирован автоматически локальным ядром системы</div>
+              </div>
+              <div class="dossier-badge-case" id="dossier-case-id">CASE #UNINITIALIZED</div>
+            </div>
+
+            <div class="results-grid" style="margin-bottom: 24px;">
+              <div class="info-card">
+                <div class="info-card-label">Целевой субъект</div>
+                <div class="info-card-value cyan" id="dossier-target-name">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Всего подтвержденных профилей</div>
+                <div class="info-card-value emerald" id="dossier-total-count">0</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Уровень цифрового следа</div>
+                <div class="info-card-value purple" id="dossier-footprint-level">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Дата разведки</div>
+                <div class="info-card-value" id="dossier-date">—</div>
+              </div>
+            </div>
+
+            <!-- Correlated Identifiers Box -->
+            <div id="dossier-identities-panel" style="margin-bottom: 20px; padding: 16px; background: rgba(8, 12, 22, 0.6); border: 1px solid var(--border-glass); border-radius: var(--radius-sm);">
+              <div class="info-card-label" style="margin-bottom: 10px;">Связанные идентификаторы и векторы (Correlated Identifiers)</div>
+              <div id="dossier-identities-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+
+            <!-- Breach Security Status Box -->
+            <div id="dossier-breach-panel" style="margin-bottom: 20px; padding: 16px; background: rgba(8, 12, 22, 0.6); border: 1px solid var(--border-glass); border-radius: var(--radius-sm);">
+              <div class="info-card-label" style="margin-bottom: 10px;">Статус безопасности и компрометации (Breach Intelligence)</div>
+              <div id="dossier-breach-content" style="font-size: 13px; line-height: 1.6; color: var(--text-secondary);">
+                Проверка утечек не запускалась
+              </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Сводка найденных ресурсов по категориям</div>
+              <div id="dossier-categories-breakdown" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+
+            <div>
+              <div class="info-card-label" style="margin-bottom: 12px;">Подробный реестр найденных профилей и ссылок</div>
+              <div class="table-scroll-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th>Платформа</th>
+                      <th>Категория</th>
+                      <th>Ссылка</th>
+                      <th>Утилиты подтверждения</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dossier-table-body">
+                    <tr><td colspan="4" class="table-empty-msg">Запустите разведку по никнейму, чтобы сформировать досье</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 8: Live Logs Terminal -->
+      <div class="tab-content" id="tab-logs">
+        <div class="terminal" id="terminal-logs">
+          <div class="log-line">
+            <span class="log-time">[Система]</span>
+            <span class="log-sys">KIberXuligan Osint By kiber инициализирован. Созвездия активны. Введите целевой никнейм.</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tab: Telegram OSINT -->
+      <div class="tab-content" id="tab-telegram">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">✈️</span>
+              <div>
+                <h3>Telegram OSINT — Разведка профилей, каналов и ID</h3>
+                <p class="module-desc">Поиск по юзернейму @username или числовому Telegram ID, аналитика TGStat/Telemetr, сообщения в открытых чатах и деанон</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="tg-input" class="module-input" placeholder="Введите @username или Telegram ID (например: @durov, 123456789)..." />
+            <button id="btn-analyze-tg" class="btn btn-primary">
+              <span class="btn-icon">✈️</span>
+              <span>Разведка Telegram</span>
+            </button>
+          </div>
+
+          <div id="tg-results" style="display: none; margin-top: 20px;">
+            <div class="results-grid" style="margin-bottom: 20px;">
+              <div class="info-card">
+                <div class="info-card-label">Идентификатор цели</div>
+                <div class="info-card-value cyan" id="res-tg-target">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Тип объекта</div>
+                <div class="info-card-value emerald" id="res-tg-type">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Название / Имя</div>
+                <div class="info-card-value" id="res-tg-title">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Прямой переход в приложение</div>
+                <div class="info-card-value" id="res-tg-app-link">—</div>
+              </div>
+            </div>
+
+            <!-- Compromise & InfoStealer Status -->
+            <div id="tg-breach-card" class="info-card" style="margin-bottom: 20px; border-color: rgba(56, 189, 248, 0.4); display: none;">
+              <div class="info-card-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>🛡️ Проверка компрометации в логах вредоносного ПО (InfoStealers)</span>
+                <span class="badge" id="tg-breach-badge">Чисто</span>
+              </div>
+              <div id="tg-breach-text" style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;"></div>
+            </div>
+
+            <!-- Discovered Linked Emails from Dumps -->
+            <div id="tg-linked-emails-wrap" style="margin-bottom: 20px; padding: 14px 18px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-sm); display: none;">
+              <div class="info-card-label" style="margin-bottom: 8px;">🔗 Связанные Email адреса из баз компрометации (COMB 3.2B):</div>
+              <div id="tg-linked-emails-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+
+            <!-- Discovered Profiles Table inside Telegram OSINT -->
+            <div id="tg-profiles-panel" style="margin-top: 20px; margin-bottom: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🎯 Обнаруженные профили в сети для этого аккаунта (<b id="tg-profiles-user" style="color: var(--accent-cyan);"></b>)</span>
+                <span class="badge" id="tg-profiles-count" style="background: rgba(0, 240, 181, 0.2); color: #00f0b5; border: 1px solid rgba(0, 240, 181, 0.4);">0 найдено</span>
+              </div>
+              <div class="table-scroll-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 180px;">Сервис / Платформа</th>
+                      <th style="width: 130px;">Категория</th>
+                      <th>Ссылка на профиль</th>
+                      <th style="width: 150px;">Подтверждено</th>
+                      <th style="width: 120px;">Статус</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tg-profiles-body">
+                    <tr><td colspan="5" class="table-empty-msg">Запустите разведку для отображения подтвержденных аккаунтов цели</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Cross Recon Action -->
+            <div id="tg-cross-recon-wrap" style="margin-top: 20px;">
+              <button id="btn-cross-recon-tg" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 13px; font-weight: 700;">
+                <span class="btn-icon">⚡</span>
+                <span>Запустить глубокий поиск по этому юзернейму на 400+ сайтах (Maigret, Snoop, Sherlock) ↗</span>
+              </button>
+            </div>
+
+            <!-- Deep Intelligence & Platform Services -->
+            <div style="margin-top: 20px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Инструменты разведки сообщений, каналов и архивов Telegram</div>
+              <div class="action-buttons-row" id="tg-services-row"></div>
+            </div>
+
+            <!-- Telegram Dorks -->
+            <div style="margin-top: 28px;">
+              <div class="info-card-label">Специализированные Google Dorks для Telegram</div>
+              <div class="dorks-list" id="tg-dorks-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: VK (ВКонтакте) OSINT -->
+      <div class="tab-content" id="tab-vk">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🟦</span>
+              <div>
+                <h3>ВКонтакте OSINT — Разведка профилей, страниц и ID</h3>
+                <p class="module-desc">Глубокий анализ аккаунтов ВКонтакте, извлечение закрытых данных, фотоальбомов, активности на стене, истории и проверка по утечкам</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="vk-input" class="module-input" placeholder="Введите VK ID, никнейм или ссылку (например: durov, id1, https://vk.com/durov)..." />
+            <button id="btn-analyze-vk" class="btn btn-primary">
+              <span class="btn-icon">🟦</span>
+              <span>Разведка ВКонтакте</span>
+            </button>
+          </div>
+
+          <div id="vk-results" style="display: none; margin-top: 20px;">
+            <!-- Profile Hero / Card -->
+            <div class="glass-card" style="padding: 20px; border-radius: var(--radius-sm); margin-bottom: 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+              <div style="position: relative;">
+                <img id="vk-avatar" src="" alt="VK Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #3b82f6; background: rgba(0,0,0,0.4);" />
+                <span id="vk-verified-badge" class="badge" style="position: absolute; bottom: 0; right: 0; background: #3b82f6; color: #fff; font-size: 11px; display: none;">✓ Официальный</span>
+              </div>
+              <div style="flex: 1; min-width: 260px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <h3 id="vk-name" style="margin: 0; font-size: 20px; color: #fff;">—</h3>
+                </div>
+                <div id="vk-status" style="font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-style: italic;"></div>
+                <div style="margin-top: 10px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px;">
+                  <div>Город: <b id="vk-city" style="color: var(--accent-cyan);">—</b></div>
+                  <div>Постов на стене: <b id="vk-posts" style="color: var(--accent-emerald);">—</b></div>
+                  <div>Профиль: <a id="vk-link" href="#" target="_blank" style="color: #3b82f6; text-decoration: none;">vk.com ↗</a></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="results-grid" style="margin-bottom: 20px;">
+              <div class="info-card">
+                <div class="info-card-label">Идентификатор цели</div>
+                <div class="info-card-value cyan" id="res-vk-target">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Верификация VK</div>
+                <div class="info-card-value emerald" id="res-vk-verified">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Количество постов</div>
+                <div class="info-card-value purple" id="res-vk-posts-count">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Местоположение</div>
+                <div class="info-card-value" id="res-vk-location">—</div>
+              </div>
+            </div>
+
+            <!-- VK Compromise & InfoStealer Status -->
+            <div id="vk-breach-card" class="info-card" style="margin-bottom: 20px; border-color: rgba(59, 130, 246, 0.4);">
+              <div class="info-card-label" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>🛡️ Проверка компрометации в логах вредоносного ПО (InfoStealers) & COMB 3.2B</span>
+                <span class="badge" id="vk-breach-badge">Чисто</span>
+              </div>
+              <div id="vk-breach-text" style="font-size: 13px; color: var(--text-secondary); margin-top: 6px;"></div>
+            </div>
+
+            <!-- Fast Action Links -->
+            <div style="margin-top: 10px; margin-bottom: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Прямой переход в сервисы и клиенты ВКонтакте</div>
+              <div class="action-buttons-row" id="vk-links-row"></div>
+            </div>
+
+            <!-- Specialized VK Dorks -->
+            <div style="margin-top: 20px;">
+              <div class="info-card-label">Специализированные Google Dorks для ВКонтакте</div>
+              <div class="dorks-list" id="vk-dorks-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Face & Reverse Image Search -->
+      <div class="tab-content" id="tab-face">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">👁️</span>
+              <div>
+                <h3>Поиск по лицу и фото (Face Recon & Reverse Image)</h3>
+                <p class="module-desc">Нейросетевое распознавание лиц в соцсетях (Search4faces, PimEyes), визуальный поиск в Яндексе и вычисление цифрового отпечатка (dHash)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropzone-container" id="face-dropzone">
+            <div class="dropzone-icon">👁️</div>
+            <div class="dropzone-text">Перетащите сюда фото лица или аватарку цели</div>
+            <div class="dropzone-sub">Поддерживаются форматы JPG, PNG, WEBP. Нажмите для выбора файла с компьютера</div>
+            <input type="file" id="face-file-input" accept="image/*" style="display: none;" />
+          </div>
+
+          <div id="face-results" style="display: none; margin-top: 24px;">
+            <!-- AI Forensics Verdict Banner -->
+            <div id="face-ai-banner" style="margin-bottom: 20px; padding: 16px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(0, 240, 181, 0.3); background: rgba(0, 240, 181, 0.1); color: #00f0b5;">
+              <span id="face-ai-icon" style="font-size: 24px;">🟢</span>
+              <div>
+                <div id="face-ai-verdict" style="font-size: 15px; font-weight: 700;">Анализ подлинности...</div>
+                <div id="face-ai-details" style="font-size: 12px; font-weight: 400; opacity: 0.85; margin-top: 2px;"></div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 24px;">
+              <div style="position: relative;">
+                <img id="face-preview-img" class="exif-preview-img" src="" alt="Face Preview" />
+                <span id="face-detected-badge" class="badge" style="position: absolute; bottom: 8px; left: 8px; background: rgba(0, 240, 181, 0.85); color: #000; font-weight: 700;">Лицо найдено</span>
+              </div>
+              
+              <!-- Detected Face Biometric Crop -->
+              <div id="face-crop-container" style="display: none; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: var(--radius-sm); padding: 12px; text-align: center;">
+                <div style="font-size: 11px; color: var(--accent-cyan); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">Кроп лица (Biometric)</div>
+                <img id="face-crop-img" src="" alt="Biometric Face Crop" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--accent-cyan);" />
+                <div id="face-crop-res" style="font-size: 11px; color: var(--text-dim); margin-top: 6px;"></div>
+              </div>
+
+              <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 12px;">
+                <div class="results-grid">
+                  <div class="info-card">
+                    <div class="info-card-label">Статус детекции лиц</div>
+                    <div class="info-card-value cyan" id="res-face-status">—</div>
+                  </div>
+                  <div class="info-card">
+                    <div class="info-card-label">Резкость / Качество (Laplacian)</div>
+                    <div class="info-card-value emerald" id="res-face-sharpness">—</div>
+                  </div>
+                  <div class="info-card">
+                    <div class="info-card-label">Разрешение и формат</div>
+                    <div class="info-card-value" id="res-face-res">—</div>
+                  </div>
+                  <div class="info-card">
+                    <div class="info-card-label">Размер файла</div>
+                    <div class="info-card-value" id="res-face-size">—</div>
+                  </div>
+                  <div class="info-card">
+                    <div class="info-card-label">Перцептивный хэш лица (dHash)</div>
+                    <div class="info-card-value emerald" id="res-face-dhash" style="font-family: monospace; font-size: 13px;">—</div>
+                  </div>
+                  <div class="info-card">
+                    <div class="info-card-label">SHA-256 Отпечаток</div>
+                    <div class="info-card-value purple" id="res-face-sha256" style="font-family: monospace; font-size: 11px; word-break: break-all;">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Author Cross-Recon (if found in EXIF) -->
+            <div id="face-author-wrap" style="margin-bottom: 20px; display: none;">
+              <button id="btn-face-cross-recon" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 13px; font-weight: 700;">
+                <span class="btn-icon">⚡</span>
+                <span>Запустить разведку по автору фото (<span id="face-author-name"></span>) на 400+ сайтах ↗</span>
+              </button>
+            </div>
+
+            <!-- Face EXIF & Full Forensic Card -->
+            <div id="face-exif-card" class="info-card" style="margin-bottom: 24px; border-color: rgba(0, 240, 181, 0.4); display: none;">
+              <div class="info-card-label" style="color: var(--accent-emerald); display: flex; justify-content: space-between; align-items: center;">
+                <span>📍 Скрытые метаданные оригинала (EXIF Forensic)</span>
+                <span class="badge" id="face-exif-badge">Камера обнаружена</span>
+              </div>
+              <div class="results-grid" style="margin-top: 14px;">
+                <div class="info-card">
+                  <div class="info-card-label">Устройство / Камера</div>
+                  <div class="info-card-value cyan" id="face-exif-device">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Дата и время съемки</div>
+                  <div class="info-card-value" id="face-exif-date">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Программа / Редактор</div>
+                  <div class="info-card-value purple" id="face-exif-software">—</div>
+                </div>
+                <div class="info-card">
+                  <div class="info-card-label">Автор / Владелец</div>
+                  <div class="info-card-value emerald" id="face-exif-artist">—</div>
+                </div>
+              </div>
+
+              <!-- GPS Coordinates Row (if present) -->
+              <div id="face-gps-card" style="margin-top: 14px; padding: 14px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(0, 240, 181, 0.2); display: none;">
+                <div style="font-size: 12px; color: var(--accent-emerald); font-weight: 700; margin-bottom: 6px;">🌍 Точные GPS-координаты места съемки:</div>
+                <div id="face-gps-coords" style="font-size: 16px; font-weight: 700; font-family: monospace; color: #fff; margin-bottom: 10px;">—</div>
+                <div class="action-buttons-row">
+                  <a id="btn-face-yandex-maps" target="_blank" class="btn-messenger tg">🗺️ Открыть в Яндекс Картах ↗</a>
+                  <a id="btn-face-google-maps" target="_blank" class="btn-messenger wa">🌍 Открыть в Google Maps ↗</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual Recognition Tags (Extracted from Reverse Image Search) -->
+            <div id="face-tags-container" style="margin-bottom: 20px; display: none;">
+              <div class="info-card-label" style="margin-bottom: 8px; color: var(--accent-cyan); display: flex; justify-content: space-between; align-items: center;">
+                <span>🏷️ Распознанные теги и визуальные ассоциации (Visual Tags)</span>
+                <span class="badge" id="face-tags-count">0 тегов</span>
+              </div>
+              <div class="tags-cloud" id="face-tags-row" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+            </div>
+
+            <!-- Direct Web Matches Table -->
+            <div id="face-matches-container" style="margin-bottom: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🌐 Найденные совпадения и страницы в сети (Web Matches)</span>
+                <span class="badge" id="face-matches-badge">0 совпадений</span>
+              </div>
+              <div class="table-scroll-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 200px;">Сервис / Домен</th>
+                      <th>Заголовок страницы / Описание</th>
+                      <th style="width: 140px;">Прямая ссылка</th>
+                    </tr>
+                  </thead>
+                  <tbody id="face-matches-table-body">
+                    <tr><td colspan="3" class="table-empty-msg">Загрузите фото для поиска совпадений...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Face & Reverse Search Engines -->
+            <div style="margin-top: 10px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Быстрый переход в нейросети распознавания лиц и поисковики</div>
+              <div class="action-buttons-row" id="face-engines-row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Crypto OSINT -->
+      <div class="tab-content" id="tab-crypto">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🪙</span>
+              <div>
+                <h3>Крипто OSINT — Анализ кошельков и транзакций</h3>
+                <p class="module-desc">Проверка баланса в реальном времени, истории транзакций и AML-репутации для BTC, ETH, TRON (USDT TRC-20), TON, Solana</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="crypto-input" class="module-input" placeholder="Введите криптокошелек (BTC: 1..., ETH: 0x..., TRON: T..., TON: EQ...)..." />
+            <button id="btn-analyze-crypto" class="btn btn-primary">
+              <span class="btn-icon">🪙</span>
+              <span>Проверить кошелек</span>
+            </button>
+          </div>
+
+          <div id="crypto-results" style="display: none; margin-top: 20px;">
+            <div class="results-grid" style="margin-bottom: 20px;">
+              <div class="info-card">
+                <div class="info-card-label">Блокчейн / Сеть</div>
+                <div class="info-card-value cyan" id="res-crypto-coin">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Текущий баланс</div>
+                <div class="info-card-value emerald" id="res-crypto-balance">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Количество транзакций</div>
+                <div class="info-card-value purple" id="res-crypto-txs">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Активность / Оборот</div>
+                <div class="info-card-value amber" id="res-crypto-total">—</div>
+              </div>
+            </div>
+
+            <!-- Explorers -->
+            <div style="margin-top: 20px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Обозреватели блоков (Explorers)</div>
+              <div class="action-buttons-row" id="crypto-explorers-row"></div>
+            </div>
+
+            <!-- AML & Fraud Reputation -->
+            <div style="margin-top: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Проверка на скам, отмывание (AML) и связь с инцидентами</div>
+              <div class="action-buttons-row" id="crypto-aml-row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Auto OSINT -->
+      <div class="tab-content" id="tab-auto">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🚗</span>
+              <div>
+                <h3>Авто OSINT — Проверка по госномеру РФ и VIN</h3>
+                <p class="module-desc">Определение региона РФ по коду, проверка истории авто в Номерограм (фото на дорогах и в ДТП), ГИБДД, РСА (ОСАГО) и залогов</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="auto-input" class="module-input" placeholder="Введите госномер РФ (например: А777АА77, М123ВЕ199) или VIN (17 символов)..." />
+            <button id="btn-analyze-auto" class="btn btn-primary">
+              <span class="btn-icon">🚗</span>
+              <span>Проверить автомобиль</span>
+            </button>
+          </div>
+
+          <div id="auto-results" style="display: none; margin-top: 20px;">
+            <div class="results-grid" style="margin-bottom: 20px;">
+              <div class="info-card">
+                <div class="info-card-label">Номер / VIN</div>
+                <div class="info-card-value cyan" id="res-auto-query">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Регион регистрации</div>
+                <div class="info-card-value emerald" id="res-auto-region">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Код региона</div>
+                <div class="info-card-value purple" id="res-auto-code">—</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-label">Страна / Тип</div>
+                <div class="info-card-value" id="res-auto-country">—</div>
+              </div>
+            </div>
+
+            <!-- Auto OSINT Links -->
+            <div style="margin-top: 20px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Официальные реестры, базы фото и проверки</div>
+              <div class="action-buttons-row" id="auto-links-row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Breaches & Leaks -->
+      <div class="tab-content" id="tab-breaches">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🔓</span>
+              <div>
+                <h3>Утечки баз данных (Breach Intelligence)</h3>
+                <p class="module-desc">Проверка компрометации Email, логина или телефона по архивам утечек СНГ (Яндекс Еда, СДЭК, Delivery) и глобальным реестрам</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-search-box">
+            <input type="text" id="breaches-input" class="module-input" placeholder="Введите Email, никнейм или телефон (например: user@mail.ru, +79991234567)..." />
+            <button id="btn-analyze-breaches" class="btn btn-primary">
+              <span class="btn-icon">🔓</span>
+              <span>Проверить утечки</span>
+            </button>
+          </div>
+
+          <div id="breaches-results" style="display: none; margin-top: 20px;">
+            <!-- Live Compromise Alert Banner -->
+            <div id="breaches-alert-banner" style="margin-bottom: 20px; padding: 16px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(0, 240, 181, 0.3); background: rgba(0, 240, 181, 0.1); color: #00f0b5;">
+              <span id="breaches-alert-icon" style="font-size: 24px;">🟢</span>
+              <div id="breaches-alert-text">Проверка завершена. В публичных логах инфостиллеров компрометация не выявлена.</div>
+            </div>
+
+            <!-- Stealer Malware Infection Card (if infected) -->
+            <div id="breaches-stealers-card" class="info-card" style="margin-bottom: 20px; border-color: rgba(244, 63, 94, 0.5); display: none;">
+              <div class="info-card-label" style="color: var(--accent-red); font-size: 13px;">🚨 Детали заражения компьютера инфостиллером (Logs/Stealer)</div>
+              <div id="breaches-stealers-body" style="margin-top: 10px; font-size: 13px; line-height: 1.6; color: var(--text-secondary);"></div>
+            </div>
+
+            <!-- Auto-Correlation Action if email was entered -->
+            <div id="breaches-correlation-wrap" style="margin-bottom: 20px; display: none;">
+              <button id="btn-breaches-cross-recon" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px 18px; font-size: 13px; font-weight: 700;">
+                <span class="btn-icon">⚡</span>
+                <span>Запустить поиск по извлеченному логину (<span id="breaches-extracted-user"></span>) на 400+ сайтах ↗</span>
+              </button>
+            </div>
+
+            <!-- Verified Leaks Catalog Table with REAL Status -->
+            <div style="margin-top: 24px;">
+              <div class="info-card-label" style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🛡️ Результаты проверки по верифицированным базам данных и логам</span>
+                <span class="badge" id="breaches-status-badge">8 источников проверено</span>
+              </div>
+              <div class="table-scroll-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 260px;">База / Источник данных</th>
+                      <th style="width: 130px;">Объем</th>
+                      <th>Статус проверки цели</th>
+                      <th style="width: 180px;">Уровень угрозы</th>
+                    </tr>
+                  </thead>
+                  <tbody id="breaches-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="info-card-label" style="margin-bottom: 12px;">Прямой переход в глобальные базы утечек и архивы даркнета</div>
+              <div class="action-buttons-row" id="breaches-links-row"></div>
+            </div>
+
+            <!-- Breaches Dorks -->
+            <div style="margin-top: 28px;">
+              <div class="info-card-label">Целевые дорки для поиска дампов и логов цели</div>
+              <div class="dorks-list" id="breaches-dorks-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Cross-Pivot Chain -->
+      <div class="tab-content" id="tab-pivot">
+        <div class="module-container">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <span style="font-size: 24px;">🧠</span>
+              <div>
+                <h3>Авто-Цепочка деанонимизации (Pivot Correlation Engine)</h3>
+                <p class="module-desc">Автоматическое извлечение почтовых адресов, альтернативных юзерок и мессенджеров из найденных профилей с привязкой на Граф связей</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: rgba(8, 12, 22, 0.7); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <div style="font-weight: 700; font-size: 15px; color: var(--text-primary); margin-bottom: 4px;">Текущая цель разведки: <span id="pivot-current-target" style="color: var(--accent-cyan);">Target</span></div>
+              <div style="font-size: 13px; color: var(--text-dim);">Доступно найденных профилей для корреляции: <b id="pivot-available-count" style="color: #fff;">0</b></div>
+            </div>
+            <button id="btn-run-pivot" class="btn btn-primary">
+              <span class="btn-icon">🧠</span>
+              <span>Собрать цепочку и обновить Граф</span>
+            </button>
+          </div>
+
+          <div id="pivot-results-panel" style="display: none; margin-top: 24px;">
+            <div class="info-card-label" style="margin-bottom: 12px;">Извлеченные связанные сущности (Tier-2 связи)</div>
+            <div class="table-scroll-container">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Тип сущности</th>
+                    <th>Значение</th>
+                    <th>Источник корреляции</th>
+                    <th>Действие</th>
+                  </tr>
+                </thead>
+                <tbody id="pivot-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <span>KIberXuligan Osint By kiber © 2026</span>
+      <span class="footer-sep">•</span>
+      <span>Интерактивные созвездия v4.0</span>
+      <span class="footer-sep">•</span>
+      <span>RuNet & Global Intelligence</span>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
