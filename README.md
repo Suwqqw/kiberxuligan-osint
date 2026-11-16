@@ -1,8 +1,19 @@
 # KIberXuligan OSINT Workstation
 
+[![Discord](https://img.shields.io/badge/Discord-Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/xPtMz5ugDs)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Локальная веб-панель для сбора и визуализации информации из открытых источников (OSINT). Объединяет несколько поисковых движков, модуль анализа изображений и валидацию телефонных номеров в едином интерфейсе на базе FastAPI.
 
 Работает полностью на localhost без передачи телеметрии или запросов на сторонние серверы аналитики.
+
+---
+
+## Сообщество
+
+💬 Наш Discord-сервер: **[https://discord.gg/xPtMz5ugDs](https://discord.gg/xPtMz5ugDs)** — вопросы, багрепорты и предложения по развитию.
 
 ---
 
@@ -37,7 +48,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/ВАШ_АККАУНТ/kiberxuligan-osint.git
+git clone https://github.com/Suwqqw/kiberxuligan-osint.git
 cd kiberxuligan-osint
 ```
 
